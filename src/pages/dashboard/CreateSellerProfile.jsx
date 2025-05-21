@@ -10,7 +10,6 @@ import { useAppKitAccount } from "@reown/appkit/react";
 const CreateSellerProfile = () => {
   const{ allSeller } = useGetSeller();
   const { address } = useAppKitAccount() 
-  console.log(typeof(allSeller))
 
    const truncateAddress = (address) => {
     if (!address) return '';

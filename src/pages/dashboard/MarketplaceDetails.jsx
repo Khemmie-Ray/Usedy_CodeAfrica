@@ -4,8 +4,8 @@ import useGetAllProduct from "../../hooks/useGetAllProduct";
 import LoadingSpinner from "../../components/Loader/LoadingSpinner";
 import { formatUnits } from "ethers";
 import Banner from "../../components/Banner";
-// import EditProduct from "../../components/EditProduct";
-// import BuyProduct from "../../components/BuyProduct";
+import EditProduct from "../../components/EditProduct";
+import BuyProduct from "../../components/BuyProduct";
 import { useAppKitAccount } from "@reown/appkit/react";
 
 const MarketplaceDetails = () => {
@@ -62,10 +62,10 @@ const MarketplaceDetails = () => {
                 Seller's wallet address:{" "}
                 <span>{truncateAddress(transaction.address)}</span>
               </p>
-              {/* {transaction.address === address && <EditProduct id={id} />}
-              {transaction.address !== address && (
+              {transaction.address.toLowerCase() === address?.toLowerCase() && <EditProduct id={id} />}
+              {transaction.address.toLowerCase() !== address?.toLowerCase() && (
                 <BuyProduct id={id} price={formatUnits(transaction.price)} />
-              )} */}
+              )}
               <p>
                 Kindly drop a comment upon receipt of your products. This is
                 crucial to ensure the seller receives their payment promptly.{" "}
