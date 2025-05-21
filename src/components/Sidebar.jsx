@@ -28,7 +28,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="bg-[#263E59] w-[20%] text-white p-8 py-12 h-[100vh] hidden lg:flex md:flex flex-col">
+    <div className="bg-[#263E59] h-[100vh] overflow-y-scroll text-white p-8 py-12  hidden lg:flex md:flex flex-col">
       <img src={logo} alt="logo" className="mb-10" />
       <p className="lg:text-[14px] md:text-[14px] text-[14px] text-white items-center py-2  px-6 font-bold mb-10">
         Wallet Address: <br /> <span>{truncateAddress(address)}</span>

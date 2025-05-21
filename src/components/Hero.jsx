@@ -17,10 +17,10 @@ const Hero = () => {
           revolution with every sale and purchase
         </p>
         <div className="mt-6">
-          <button className="bg-[#154A80] rounded-lg p-3 text-white mr-4 text-[18px]">
+          <button className="bg-[#154A80] rounded-lg p-3 text-white mr-4 text-[16px]">
             Sell Products
           </button>
-          <button className="border border-[#154A80] rounded-lg p-3 text-[#154A80] bg-white text-[18px]">
+          <button className="border border-[#154A80] rounded-lg p-3 text-[#154A80] bg-white text-[16px]">
             Buy Products
           </button>
         </div>

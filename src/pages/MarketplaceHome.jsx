@@ -8,12 +8,11 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 const MarketplaceHome = () => {
   const { product } = useGetProduct();
-  console.log(product)
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
   const isMobile = useMediaQuery("(max-width: 640px)");
-  const itemsPerPage = isMobile ? 2 : 6;
+  const itemsPerPage = isMobile ? 1 : 3;
 
   useEffect(() => {
     if (product.length > 0) {
