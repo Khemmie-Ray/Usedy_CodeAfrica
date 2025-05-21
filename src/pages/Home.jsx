@@ -13,7 +13,7 @@ const Home = () => {
         <Hero />
       </section>
       <section className="bg-white py-20">
-        <div className="lg:w-[90%] md:w-[90%] w-[100%]">
+        <div className="lg:w-[90%] md:w-[90%] w-[100%] mx-auto">
           <h2 className="lg:text-[32px] md:text-[32px] text-[24px] text-center font-[700] text-[#154A80] lg:w-[70%] md:w-[70%] w-[100%] font-titiliumweb mx-auto mb-10">
             Welcome to Usedy, where environmental consciousness meets blockchain
             innovation

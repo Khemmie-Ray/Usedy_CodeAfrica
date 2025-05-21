@@ -1,12 +1,28 @@
 import React from "react";
 import CreateProfile from "../../components/CreateProfile";
 import profileBg from "../../assets/profile.png";
-import useGetSeller from "../../Hooks/useGetSeller";
+import useGetSeller from '../../hooks/useGetSeller'
 import { formatUnits } from "ethers";
 import EditProfile from "../../components/EditProfile";
 import { useAppKitProvider } from "@reown/appkit/react";
+import { useAppKitAccount } from "@reown/appkit/react";
 
 const CreateSellerProfile = () => {
+  const{ allSeller } = useGetSeller();
+  const { address } = useAppKitAccount() 
+  console.log(typeof(allSeller))
+
+   const truncateAddress = (address) => {
+    if (!address) return '';
+    const start = address.slice(0, 8);
+    return `${start}...`;
+  };
+
+  const convertToWholeNumber = (formattedNumber) => {
+    const number = parseFloat(formattedNumber);
+    return Math.floor(number);
+  };
+
   return (
     <main>
       <div className="flex flex-col lg:flex-row md:flex-row bg-[#263E59] rounded-[20px] w-[100%] text-white">
@@ -36,7 +52,7 @@ const CreateSellerProfile = () => {
       </h2>
 
       <div className="flex lg:flex-row md:flex-row flex-col justify-between items-center my-10 text-[#0F160F] flex-wrap">
-        {/* {sellers?.map((info) => (
+        {allSeller?.map((info) => (
           <div
             className="lg:w-[32%] md:w-[32%] w-[100%] p-4 border border-[#0F160F]/20 rounded-lg mb-4 shadow-lg"
             key={info.id}
@@ -64,11 +80,11 @@ const CreateSellerProfile = () => {
             </p>
             <p className="flex justify-between my-4 font-bold">
               Payment Total:{" "}
-              <span>{convertToWholeNumber(formatUnits(info.payment))} PTT</span>
+              <span>{formatUnits(info.payment)} ETH</span>
             </p>
             {info.address === address && <EditProfile id={Number(info.id)} />}
           </div>
-        ))} */}
+        ))}
       </div>
     </main>
   );
