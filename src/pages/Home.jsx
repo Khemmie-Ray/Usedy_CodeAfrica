@@ -1,7 +1,4 @@
 import React from "react";
-import image1 from "../assets/heroimage1.svg";
-import image2 from "../assets/heroimage2.svg";
-import bgImg from "../assets/ornament.svg";
 import Hero from "../components/Hero";
 import MarketplaceHome from "./MarketplaceHome";
 import About from "./About";
@@ -49,13 +46,13 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* <section className=" my-10">
-        <h2 className="px-4 lg:px-0 md:px-0 lg:text-[32px] md:text-[32px] text-[24px] font-[700] my-6 flex justify-between flex-col lg:flex-row md:flex-row  w-[90%] mx-auto font-titiliumweb items-center text-center lg:text-left md:text-left">Recyclable materials for sale (Prices are in Unit of Measure) <span className="lg:text-[24px] md:text-[24px] text-[18px] font-[400]">View More</span></h2>
+      <section className=" my-10">
+        <h2 className="px-4 lg:px-0 md:px-0 lg:text-[28px] md:text-[28px] text-[20px] font-[700] my-6 flex justify-between flex-col lg:flex-row md:flex-row  w-[90%] mx-auto font-titiliumweb items-center text-center lg:text-left md:text-left">Recyclable materials for sale (Prices are in Unit of Measure) <span className="text-[16px] font-[400]">View More</span></h2>
         <MarketplaceHome />
       </section>
       <section id="about-us" className="lg:w-[90%] md:w-[90%] w-[100%] mx-auto my-14">
         <About />
-      </section> */}
+      </section>
     </main>
   );
 };

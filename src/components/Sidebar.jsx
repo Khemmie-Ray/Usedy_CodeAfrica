@@ -15,8 +15,8 @@ const Sidebar = () => {
   const { address } = useAppKitAccount()
 
   const activeStyle = {
-    borderLeft: "1px solid #2A382A",
-    borderRight: "1px solid #2A382A",
+    borderLeft: "1px solid #FFFFFF",
+    borderRight: "1px solid #FFFFFF",
     width: "100%",
     padding: "20px",
   };

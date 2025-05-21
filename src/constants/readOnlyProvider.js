@@ -1,3 +1,3 @@
 import { JsonRpcProvider } from "ethers";
 
-export const readOnlyProvider = new JsonRpcProvider('http://localhost:3001/rpc');
+export const readOnlyProvider = new JsonRpcProvider(import.meta.env.VITE_RPC_PROVIDER);
