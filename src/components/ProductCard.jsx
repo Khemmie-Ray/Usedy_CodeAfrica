@@ -8,7 +8,7 @@ const ProductCard = () => {
   return (
     <div className="flex lg:flex-row md:flex-row flex-col justify-between items-center my-10 flex-wrap">
       {allProduct.map((info) => (
-        <div className="lg:w-[32%] md:w-[32%] w-[100%] p-4 border border-[#0F160F]/20 rounded-lg mb-4 shadow-lg">
+        <div className="lg:w-[32%] md:w-[32%] w-[100%] p-4 border border-[#0F160F]/20 rounded-lg mb-4 shadow-lg"  key={info.id}>
           <Link
             to={`/dashboard/market_place/${info.id}`}
             className="text-[#0F160F]"

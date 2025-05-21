@@ -131,7 +131,7 @@ const AddProduct = () => {
             type="text"
             value={productWeight}
             onChange={(e) => setProductWeight(e.target.value)}
-            placeholder="Enter product weight"
+            placeholder="Enter quantity"
             className="border mb-4 border-white/20 w-[100%] rounded-md hover:outline-0 p-3"
           />
           <p className="mb-2">Product Price</p>

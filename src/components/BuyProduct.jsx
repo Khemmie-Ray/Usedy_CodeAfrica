@@ -1,13 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import useContractInstance from "../hooks/useContractInstance";
-import { useAppKitAccount, useAppKitNetwork } from "@reown/appkit/react";
+import { useAppKitAccount, useAppKitNetwork, useAppKitProvider } from "@reown/appkit/react";
 import { toast } from "react-toastify";
 import { baseSepolia } from "@reown/appkit/networks";
 import { ErrorDecoder } from "ethers-decode-error";
 import abi from "../constants/abi.json";
-import { ethers } from "ethers";
+import { ethers, Contract, BrowserProvider } from "ethers";
 const style = {
   position: "absolute",
   top: "50%",
@@ -27,32 +26,36 @@ const BuyProduct = ({ id, price }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [amount, setAmount] = useState(0);
-  const contract = useContractInstance(true);
   const { address } = useAppKitAccount();
   const { chainId } = useAppKitNetwork();
   const errorDecoder = ErrorDecoder.create([abi]);
+   const { walletProvider } = useAppKitProvider("eip155");
+ 
 
-  const handleBuyProduct = useCallback(
-    async (id, amount) => {
-     if (!id || !amount) {
-        toast.error("Invalid input!");
-        return;
-      }
+  const handleBuyProduct = useCallback(async (id, amount) => {
+    if (!id || !amount) {
+      toast.error("Invalid input!");
+      return;
+    }
 
-      if (!address) {
-        toast.error("Please connect your wallet");
-        return;
-      }
+    if (!address) {
+      toast.error("Please connect your wallet");
+      return;
+    }
 
-      if (!contract) {
-        toast.error("Contract not found");
-        return;
-      }
+    if (Number(chainId) !== Number(baseSepolia.id)) {
+      toast.error("You're not connected to Base Sepolia");
+      return;
+    }
+    const getProvider = (provider) => new ethers.BrowserProvider(provider);
+    const readWriteProvider = getProvider(walletProvider);
+    const signer = await readWriteProvider.getSigner();
 
-      if (Number(chainId) !== Number(baseSepolia.id)) {
-        toast.error("You're not connected to Base Sepolia");
-        return;
-      }
+    const contract = new Contract(
+      import.meta.env.VITE_CONTRACT_ADDRESS,
+      abi,
+      signer
+    );
 
     const total = ethers.parseUnits(price.toString(), 18) * BigInt(amount);
 
@@ -60,9 +63,8 @@ const BuyProduct = ({ id, price }) => {
       const transaction = await contract.buyProduct(id, amount, {
         value: total,
       });
-      
-      const receipt = await transaction.wait();
 
+      const receipt = await transaction.wait();
 
       if (receipt.status) {
         return toast.success("Product purchase successful!", {
@@ -73,15 +75,17 @@ const BuyProduct = ({ id, price }) => {
       toast.error("Product purchase failed", {
         position: "top-center",
       });
-    } catch (error) {
+    } catch (err) {
       const decodedError = await errorDecoder.decode(err);
-        toast.error(`Product purchase failed - ${decodedError.reason}`, {
-          position: "top-center",
-        });
+      toast.error(`Product purchase failed - ${decodedError.reason}`, {
+        position: "top-center",
+      });
+      console.log(decodedError.reason);
     } finally {
+      setAmount(0);
       setOpen(false);
     }
-  },[])
+  }, []);
 
   return (
     <div>
